@@ -1,4 +1,4 @@
-const { Tech, Matchup } = require('../models');
+const { User } = require('../models');
 
 const resolvers = {
   Query: {
@@ -10,8 +10,13 @@ const resolvers = {
     login: async (parent, args) => {
       
     },
-    addUser: async (parent, { _id, techNum }) => {
-      
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      if (!user) {
+        return
+      } 
+      const token = signToken(user);
+      return { token, user };
     },
     saveBook: async (parent, { _id, techNum }) => {
       

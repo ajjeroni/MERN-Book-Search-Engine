@@ -45,9 +45,9 @@ startApolloServer();
 //2 install any additional necessary dependencies
 //3 check your config folder for the connection to mongo 'mongodb://127.0.0.1:27017/googlebooks'
 //4 use Apollo in server.js
-
 //5 add typeDefs and Resolvers in schema folder on server side
 //6 setup Apollo in app.js
+
 //7 define mutations and  queries on client side
 //8 update components and pages with graphql/apollo
 //9 deploy to heroku
