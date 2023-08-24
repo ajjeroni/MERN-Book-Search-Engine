@@ -5,6 +5,11 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       // context.user._id
+      const user = await User.findOne(context.user._id);
+      if (!user) {
+        return res.status(400).json({ message: 'Cannot find a user with this id!' });
+      }
+      res.json(user);
     },
   },
   Mutation: {
