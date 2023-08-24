@@ -59,7 +59,25 @@ const resolvers = {
         throw new Error(error.message);
       }
     },
-    removeBook: async (parent, args, context) => {},
+    removeBook: async (parent, { bookId }, context) => {
+      if (!context.user) {
+        throw new Error("Authentication required");
+      }
+      try {
+        
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedBooks: bookId } },
+          { new: true, runValidators: true }
+        )
+        if (!updatedUser) {
+          throw new Error("User not found");
+        }
+        return updatedUser;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
   },
 };
 
