@@ -31,6 +31,14 @@ const resolvers = {
       return { token, user };
     },
     addUser: async (parent, args) => {
+      const user = await User.create(args);
+      if (!user) {
+        return;
+      }
+      const token = signToken(user);
+      return { token, user };
+    },
+    saveBook: async (parent, { bookData }, context) => {
       if (!context.user) {
         throw new Error("Authentication required");
       }
